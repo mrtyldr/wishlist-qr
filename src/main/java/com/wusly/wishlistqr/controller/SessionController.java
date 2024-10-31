@@ -5,6 +5,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.wusly.wishlistqr.controller.model.Response;
 import com.wusly.wishlistqr.domain.CreateSessionCommand;
 import com.wusly.wishlistqr.domain.SessionDto;
 import com.wusly.wishlistqr.service.SessionService;
@@ -30,8 +31,8 @@ public class SessionController {
     }
 
     @GetMapping("/active")
-    public SessionDto getActiveSession(Principal principal) {
-        return sessionService.getActiveSession(principal.getName());
+    public Response<SessionDto> getActiveSession(Principal principal) {
+        return Response.of(sessionService.getActiveSession(principal.getName()));
     }
 
     @GetMapping("{sessionId}/qr")

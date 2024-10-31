@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("/api/v1/musics")
 @RequiredArgsConstructor
@@ -22,7 +24,7 @@ public class MusicController {
     }
 
     @PostMapping
-    public void uploadMusic(@RequestBody UploadMusicCommand command) {
-        musicService.uploadMusic(command);
+    public void uploadMusic(@RequestBody UploadMusicCommand command, Principal principal) {
+        musicService.uploadMusic(command,principal.getName());
     }
 }
