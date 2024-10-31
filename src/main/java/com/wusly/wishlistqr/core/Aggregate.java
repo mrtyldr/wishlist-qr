@@ -5,6 +5,7 @@ import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.domain.Persistable;
 
 import java.io.Serializable;
@@ -13,22 +14,22 @@ import java.util.Objects;
 
 
 @MappedSuperclass
+@Getter
+@Setter
 public abstract class Aggregate<ID extends Serializable> implements Persistable<ID>{
 
     @Transient
     private boolean isNew = false;
 
+
     @NotNull
-    @Getter
     @Id
     protected ID id;
 
-    OffsetDateTime createdAt = OffsetDateTime.now();
-    OffsetDateTime updatedAt = createdAt;
 
-    public void setId(ID id) {
-        this.id = id;
-    }
+    OffsetDateTime createdAt = OffsetDateTime.now();
+
+    OffsetDateTime updatedAt = createdAt;
 
     protected void markAsNew() {
         isNew = true;
@@ -37,26 +38,6 @@ public abstract class Aggregate<ID extends Serializable> implements Persistable<
     @Override
     public boolean isNew() {
         return isNew;
-    }
-
-    public void setCreatedAt(OffsetDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public void setUpdatedAt(OffsetDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public ID getId() {
-        return id;
-    }
-
-    public OffsetDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public OffsetDateTime getUpdatedAt() {
-        return updatedAt;
     }
 
     @Override

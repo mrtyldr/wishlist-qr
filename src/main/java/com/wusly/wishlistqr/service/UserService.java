@@ -1,9 +1,6 @@
 package com.wusly.wishlistqr.service;
 
-import com.wusly.wishlistqr.controller.UserController;
-import com.wusly.wishlistqr.domain.AuthenticationResponse;
-import com.wusly.wishlistqr.domain.User;
-import com.wusly.wishlistqr.domain.UserRepository;
+import com.wusly.wishlistqr.domain.*;
 import com.wusly.wishlistqr.security.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,7 +19,7 @@ public class UserService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public void register(UserController.RegisterUserCommand command) {
+    public void register(RegisterUserCommand command) {
         var user = new User(UUID.randomUUID(),
                 command.email(),
                 passwordEncoder.encode(command.password()),
@@ -36,7 +33,7 @@ public class UserService {
 
 
 
-    public AuthenticationResponse login(UserController.LoginCommand command){
+    public AuthenticationResponse login(LoginCommand command){
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         command.email(),

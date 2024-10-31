@@ -1,9 +1,6 @@
 package com.wusly.wishlistqr.service;
 
-import com.wusly.wishlistqr.controller.SessionController;
-import com.wusly.wishlistqr.domain.Session;
-import com.wusly.wishlistqr.domain.SessionRepository;
-import com.wusly.wishlistqr.domain.UserRepository;
+import com.wusly.wishlistqr.domain.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +13,11 @@ public class SessionService {
     private final UserRepository userRepository;
     private final SessionRepository sessionRepository;
 
-    public void createSession(SessionController.CreateSessionCommand command, String email) {
+    public void createSession(CreateSessionCommand command, String email) {
         var user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("ss"));
+        if(sessionRepository.existsByUserIdAndActive(user.getId(), true))
+            throw new RuntimeException("AlreadyExist!");
         var session = new Session(
                 UUID.randomUUID(),
                 command.sessionName(),
@@ -27,5 +26,14 @@ public class SessionService {
         );
 
         sessionRepository.save(session);
+    }
+
+    public SessionDto getActiveSession(String email) {
+        var user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("ss"));
+
+       return sessionRepository.findByUserIdAndActive(user.getId(), true)
+                .map(s -> new SessionDto(s.getId(), s.getSessionName()))
+                .orElseThrow(() -> new RuntimeException("ss"));
     }
 }
