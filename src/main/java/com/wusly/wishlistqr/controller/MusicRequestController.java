@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+@CrossOrigin
 @RequestMapping("/api/v1/public/musics")
 public class MusicRequestController {
 

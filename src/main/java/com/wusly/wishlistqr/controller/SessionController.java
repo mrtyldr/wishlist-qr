@@ -20,7 +20,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/sessions")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+@CrossOrigin
 public class SessionController {
     private final SessionService sessionService;
     @Value("${deployment.url}")

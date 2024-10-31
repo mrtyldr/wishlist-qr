@@ -13,7 +13,7 @@ import java.security.Principal;
 @RestController
 @RequestMapping("/api/v1/musics")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+@CrossOrigin
 public class MusicController {
     private final MusicService musicService;
 
