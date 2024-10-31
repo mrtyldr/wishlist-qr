@@ -31,6 +31,7 @@ public class UserService {
                 command.nickName()
         );
 
+        userRepository.save(user);
     }
 
 

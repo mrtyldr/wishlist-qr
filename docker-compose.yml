@@ -1,0 +1,27 @@
+
+services:
+  db:
+    image: postgres:17.0
+    container_name: db
+    environment:
+      - TZ=UTC
+      - PGTZ=UTC
+      - POSTGRES_DB=testdb
+      - POSTGRES_USER=dbadmin
+      - POSTGRES_PASSWORD=dbadmin
+    ports:
+      - "5432:5432"
+
+  integration-db:
+    image: postgres:17.0
+    container_name: integration-db
+    environment:
+      - TZ=UTC
+      - PGTZ=UTC
+      - POSTGRES_DB=testdb
+      - POSTGRES_USER=dbadmin
+      - POSTGRES_PASSWORD=dbadmin
+    ports:
+      - "5433:5432"
+
+

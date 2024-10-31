@@ -28,9 +28,9 @@ public class SecurityConfig {
                         "/swagger-ui.html",
                         "/swagger-ui/**",
                         "/v3/api-docs/**",
-                        "/api/v1/user/login",
-                        "/api/v1/user/register",
-                        "/api/v1/user/ping",
+                        "/api/v1/users/login",
+                        "/api/v1/users/register",
+                        "/api/v1/users/ping",
                         "/api/v1/public/**"
                 ).permitAll())
                 .authorizeHttpRequests(matcher -> matcher.anyRequest().authenticated())

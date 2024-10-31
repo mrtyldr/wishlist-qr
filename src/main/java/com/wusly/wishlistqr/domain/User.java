@@ -2,6 +2,7 @@ package com.wusly.wishlistqr.domain;
 
 import com.wusly.wishlistqr.core.Aggregate;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,6 +16,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @NoArgsConstructor
+@Table(name = "t_user")
 public class User extends Aggregate<UUID> implements UserDetails {
 
     private String email;
