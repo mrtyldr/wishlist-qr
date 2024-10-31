@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.awt.image.BufferedImage;
 import java.security.Principal;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/sessions")
@@ -33,6 +34,11 @@ public class SessionController {
     @GetMapping("/active")
     public Response<SessionDto> getActiveSession(Principal principal) {
         return Response.of(sessionService.getActiveSession(principal.getName()));
+    }
+
+    @PutMapping("/{sessionId}/close")
+    public void closeSession(@PathVariable UUID sessionId, Principal principal) {
+        sessionService.closeSession(sessionId, principal.getName());
     }
 
     @GetMapping("{sessionId}/qr")
