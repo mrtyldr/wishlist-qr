@@ -38,15 +38,12 @@ public class SessionService {
                 .orElseThrow(() -> new RuntimeException("ss"));
     }
 
-    public void closeSession(UUID sessionId, String mail) {
-        var user = userRepository.findByEmail(mail)
+    public void closeSession(UUID sessionId, String email) {
+        var user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("ss"));
-
 
         var session = sessionRepository.findById(sessionId)
                 .orElseThrow(() -> new RuntimeException("ss"));
-        if(session.getUserId() != user.getId())
-            throw new NotFoundException("session not found!!");
 
         session.setActive(false);
         sessionRepository.save(session);

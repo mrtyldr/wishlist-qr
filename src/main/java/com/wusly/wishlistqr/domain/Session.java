@@ -21,7 +21,7 @@ public class Session extends Aggregate<UUID> {
     @Setter
     private boolean active;
 
-    public Session(UUID id,String sessionName, UUID userId, boolean active) {
+    public Session(UUID id, String sessionName, UUID userId, boolean active) {
         this.id = id;
         this.sessionName = sessionName;
         this.userId = userId;

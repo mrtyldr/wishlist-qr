@@ -20,7 +20,8 @@ public class UserService {
     private final AuthenticationManager authenticationManager;
 
     public void register(RegisterUserCommand command) {
-        var user = new User(UUID.randomUUID(),
+        var user = new User(
+                UUID.randomUUID(),
                 command.email(),
                 passwordEncoder.encode(command.password()),
                 command.firstName(),
