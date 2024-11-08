@@ -16,13 +16,13 @@ public class MusicService {
     private final UserRepository userRepository;
     private final MusicRequestRepository musicRequestRepository;
 
-    public void uploadMusic(MusicController.UploadMusicCommand command, String email) {
+    public void uploadMusic(String title, String artist, String email) {
         var user = userRepository.findByEmail(email)
                 .orElseThrow(RuntimeException::new);
         musicRepository.save(new Music(
                 UUID.randomUUID(),
-                command.title(),
-                command.artist(),
+                title,
+                artist,
                 0.0,
                 user.getId()
         ));

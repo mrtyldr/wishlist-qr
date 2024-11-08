@@ -25,6 +25,6 @@ public class MusicController {
 
     @PostMapping
     public void uploadMusic(@RequestBody UploadMusicCommand command, Principal principal) {
-        musicService.uploadMusic(command, principal.getName());
+        musicService.uploadMusic(command.title(), command.artist(), principal.getName());
     }
 }

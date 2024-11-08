@@ -3,12 +3,11 @@ package com.wusly.wishlistqr.controller;
 import com.wusly.wishlistqr.controller.model.Response;
 import com.wusly.wishlistqr.domain.MusicRepository;
 import com.wusly.wishlistqr.domain.MusicRequestRepository;
-import com.wusly.wishlistqr.domain.UserRepository;
+
 import com.wusly.wishlistqr.service.MusicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 
