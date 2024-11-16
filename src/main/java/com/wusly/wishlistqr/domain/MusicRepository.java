@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface MusicRepository extends JpaRepository<Music, UUID> {
@@ -17,4 +18,6 @@ public interface MusicRepository extends JpaRepository<Music, UUID> {
     List<Music> search(String query);
 
     List<Music> findByUserId(@NotNull UUID id);
+
+    Optional<Music> findByIdAndUserId(UUID id, @NotNull UUID userId);
 }

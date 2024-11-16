@@ -54,4 +54,12 @@ public class MusicService {
                 .orElseThrow(RuntimeException::new);
         return musicRepository.findByUserId(user.getId());
     }
+
+    public void delete(UUID id, String email) {
+        var user = userRepository.findByEmail(email)
+                .orElseThrow(RuntimeException::new);
+        var music = musicRepository.findByIdAndUserId(id, user.getId())
+                .orElseThrow(RuntimeException::new);
+        musicRepository.delete(music);
+    }
 }

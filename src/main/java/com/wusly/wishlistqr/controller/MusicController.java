@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/musics")
@@ -21,6 +22,10 @@ public class MusicController {
     ) {
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteMusic(@PathVariable UUID id, Principal principal) {
+        musicService.delete(id,principal.getName());
+    }
     @PostMapping
     public void uploadMusic(@RequestBody UploadMusicCommand command, Principal principal) {
         musicService.uploadMusic(command.title(), command.artist(), principal.getName());
