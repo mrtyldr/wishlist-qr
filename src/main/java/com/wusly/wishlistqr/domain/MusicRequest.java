@@ -18,11 +18,17 @@ public class MusicRequest extends Aggregate<UUID> {
     private UUID sessionId;
     private String title;
     private String artist;
+    private Boolean accepted;
 
-    public MusicRequest(UUID id,UUID sessionId, String title, String artist) {
+    public MusicRequest(UUID id, UUID sessionId, String title, String artist) {
         this.id = id;
         this.sessionId = sessionId;
         this.title = title;
         this.artist = artist;
+        this.accepted = false;
+    }
+
+    public void accept() {
+        this.accepted = true;
     }
 }

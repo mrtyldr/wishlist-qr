@@ -46,7 +46,7 @@ public class MusicRequestController {
             UUID musicId,
             String artist,
             String title
-    ){
+    ) {
 
     }
 
@@ -54,17 +54,31 @@ public class MusicRequestController {
     public void requestMusic(@PathVariable UUID sessionId, @RequestBody MusicRequestCommand command) {
         musicService.requestMusic(sessionId, command);
     }
+
     public record MusicRequestResponse(
+            UUID requestId,
             String artist,
-            String title){}
+            String title) {
+    }
 
     @GetMapping("/{sessionId}/request")
     public Response<List<MusicRequestResponse>> getMusicRequests(@PathVariable UUID sessionId) {
-        return Response.of(musicRequestRepository.findBySessionId(sessionId)
+        return Response.of(musicRequestRepository.findBySessionIdAndAccepted(sessionId, false)
                 .stream()
                 .map(m -> new MusicRequestResponse(
+                        m.getId(),
                         m.getArtist(),
                         m.getTitle()
                 )).toList());
     }
+
+    @PutMapping("/{sessionId}/request/{requestId}")
+    public void acceptMusicRequest(@PathVariable UUID sessionId, @PathVariable UUID requestId) {
+        musicRequestRepository.findById(requestId)
+                .ifPresent(m -> {
+                    m.accept();
+                    musicRequestRepository.save(m);
+                });
+    }
+
 }
