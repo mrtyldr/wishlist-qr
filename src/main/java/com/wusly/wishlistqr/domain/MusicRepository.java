@@ -1,5 +1,6 @@
 package com.wusly.wishlistqr.domain;
 
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -14,4 +15,6 @@ public interface MusicRepository extends JpaRepository<Music, UUID> {
             or m.title ilike :query
             """)
     List<Music> search(String query);
+
+    List<Music> findByUserId(@NotNull UUID id);
 }

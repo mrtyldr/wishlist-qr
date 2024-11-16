@@ -2,10 +2,12 @@ package com.wusly.wishlistqr.service;
 
 import com.wusly.wishlistqr.controller.MusicController;
 import com.wusly.wishlistqr.controller.MusicRequestController;
+import com.wusly.wishlistqr.controller.model.Response;
 import com.wusly.wishlistqr.domain.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -45,5 +47,11 @@ public class MusicService {
                     command.artist(),
                     command.title()
             ));
+    }
+
+    public List<Music> getAll(String email) {
+        var user = userRepository.findByEmail(email)
+                .orElseThrow(RuntimeException::new);
+        return musicRepository.findByUserId(user.getId());
     }
 }
